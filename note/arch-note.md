@@ -1,6 +1,6 @@
 # ArchLinux 折腾日记
 
-[toc]
+[zsh](###zsh)
 
 ## 说明
 
@@ -160,7 +160,7 @@ export all_proxy=socks5://127.0.0.1:7890
 
 
 
-## zsh
+### zsh
 
 > zsh 是一个终端中的shell软件，用来代替linux默认的bash，以下是它的安装与配置方法
 
