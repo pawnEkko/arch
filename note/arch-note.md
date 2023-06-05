@@ -1,6 +1,6 @@
 # ArchLinux 折腾日记
 
-[zsh](###zsh)
+[zsh](#zsh)
 
 ## 说明
 
