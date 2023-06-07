@@ -253,9 +253,3 @@ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 ```
 p10k configure
 ```
-
-[picom](https://github.com/pawnEkko/arch/blob/master/note/picom.md)
-=======
-# ReadMe
-这个仓库是我折腾Arch Linux 的记录并且保存了在此系统下的一些软件的配置
->>>>>>> c08859559e2bbe5baa0496dc6282537a282ddd0f
