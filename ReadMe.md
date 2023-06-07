@@ -252,3 +252,5 @@ echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 ```
 p10k configure
 ```
+
+hhh
