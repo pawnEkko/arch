@@ -1,21 +1,12 @@
-#!/usr/bin/env bash
-
-# Add this script to your wm startup file.
-
-DIR="$HOME/.config/polybar"
+#!/bin/sh
 
 # Terminate already running bar instances
 killall -q polybar
 
+rm ~/.config/polybar/config && cp ~/.config/polybar/barA_config ~/.config/polybar/config
+
 # Wait until the processes have been shut down
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
-# if type "xrandr"; then
-#   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-#     MONITOR=$m polybar -reload main -c ~/.config/polybar/1/config.ini &
-#   done
-# else
-#   polybar -reload main -c ~/.config/polybar/1/config.ini &
-# fi
-# Launch the bar
-polybar -q main -c "$DIR"/config.ini &
+# Launch Polybar, using default config location ~/.config/polybar/config
+polybar barA
