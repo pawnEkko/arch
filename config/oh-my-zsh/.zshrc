@@ -1,6 +1,14 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+
+##################
+#   自定义别名   #
+##################
+alias vim=nvim
+
+export LC_CTYPE=zh_CN.UTF-8
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -81,13 +89,10 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-#自定义别名
-
-alias vim=nvim
 
 
 
-#自定义环境变量
+
 
 
 

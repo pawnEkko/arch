@@ -22,7 +22,9 @@ set $mod1 Mod1
 #打开rofi（替换i3默认的软件搜索）
 bindsym $mod+d exec rofi -show drun
 #打开终端
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
+#打开一个浮动终端
+bindsym $mod1+Return exec alacritty -t 'alacritty-alarictty'
 #关闭窗口
 bindsym $mod+q kill
 #使用编号创建/移动到一个工作区
@@ -38,6 +40,8 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 #将当前焦点窗口浮动
 bindsym $mod+Shift+space floating toggle
+#用控制键和鼠标控制浮动窗口的位置和大小
+floating_modifier $mod
 #在已经浮动窗口和未浮动窗口之间切换
 bindsym $mod+space focus mode_toggle
 # 重启i3
@@ -47,6 +51,12 @@ bindsym $mod+Shift+r restart
 # 退出i3wm加载之前的桌面环境
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+a focus parent
+# 音量控制
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 
 ########################
@@ -165,9 +175,9 @@ bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 
-# #########
-# 窗口设置#
-###########
+##########
+#窗口设置#
+##########
 # 设置窗口边框
 default_border pixel 0
 default_floating_border pixel 1
@@ -177,6 +187,12 @@ hide_edge_borders both
 # 设置窗口间距
 gaps inner 6
 gaps outer 3
+
+
+##############
+#设置窗口浮动#
+##############
+for_window [title="^alacritty-alarictty$"] floating enable resize set 1280 960, move position center
 
 
 ######################
@@ -190,16 +206,6 @@ font pango:monospace 8
 #         status_command i3status
 # }
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
 
 #######################
 #       开机自启动    #
@@ -208,21 +214,27 @@ floating_modifier $mod
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
+
+
 #自己配置的开机启动
-#
+
 # 设置自动连接外部显示器 并设置以什么分辨率启动
 # 可以在终端中输入 xrandr 这个指令来查看连接了哪些显示器
 # exec exec_always --output 显示器名称 --mode 分辨率
+
 # 输入法
 exec --no-startup-id fcitx-autostart
 exec --no-startup-id fcitx5 -d
+
 # picom
 exec_always --no-startup-id picom -b
+
 # feh壁纸软件
 # 直接设置对应目录中的某一张图片作为壁纸
 exec_always --no-startup-id feh --bg-fill ~/Download/壁纸/759f6d6c376a2494324b54e23ca1d0eb.jpg
 # 设置每次开机自动从对应目录选择一张图片作为壁纸
 # exec_always --no-startup-id feh --randomize --bg-fill 壁纸路径
+
 #polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 # exec ~/.config/polybar/launch.sh
