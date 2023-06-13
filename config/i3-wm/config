@@ -227,7 +227,7 @@ exec --no-startup-id fcitx-autostart
 exec --no-startup-id fcitx5 -d
 
 # picom
-exec_always --no-startup-id picom -b
+exec_always --no-startup-id picom --experimental-backends
 
 # feh壁纸软件
 # 直接设置对应目录中的某一张图片作为壁纸
